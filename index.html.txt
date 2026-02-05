@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trading Journal Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>📈 Trading Journal</h1>
+
+  <section class="form-section">
+    <h2>Add Trade</h2>
+    <form id="tradeForm">
+      <input type="number" placeholder="Profit / Loss ($)" id="pl" required />
+      <input type="number" placeholder="Confidence (1-10)" id="confidence" required />
+      <input type="text" placeholder="Strategy" id="strategy" />
+      <input type="number" placeholder="Risk ($)" id="risk" />
+      <input type="text" placeholder="R/R Ratio" id="rr" />
+      <input type="text" placeholder="Platform" id="platform" />
+      <input type="text" placeholder="Notes / Value" id="notes" />
+      <button type="submit">Add Trade</button>
+    </form>
+  </section>
+
+  <section class="dashboard">
+    <h2>Dashboard</h2>
+    <div class="stats">
+      <p>Total P/L: <span id="totalPL">$0</span></p>
+      <p>Total Trades: <span id="totalTrades">0</span></p>
+      <p>Average Confidence: <span id="avgConfidence">0</span></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trade Log</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>P/L</th>
+          <th>Confidence</th>
+          <th>Strategy</th>
+          <th>Risk</th>
+          <th>R/R</th>
+          <th>Platform</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="tradeTable"></tbody>
+    </table>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

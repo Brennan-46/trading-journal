@@ -1,0 +1,54 @@
+const form = document.getElementById("tradeForm");
+const table = document.getElementById("tradeTable");
+
+let trades = JSON.parse(localStorage.getItem("trades")) || [];
+
+function render() {
+  table.innerHTML = "";
+  let totalPL = 0;
+  let totalConfidence = 0;
+
+  trades.forEach(trade => {
+    totalPL += trade.pl;
+    totalConfidence += trade.confidence;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${trade.pl}</td>
+      <td>${trade.confidence}</td>
+      <td>${trade.strategy}</td>
+      <td>${trade.risk}</td>
+      <td>${trade.rr}</td>
+      <td>${trade.platform}</td>
+      <td>${trade.notes}</td>
+    `;
+    table.appendChild(row);
+  });
+
+  document.getElementById("totalPL").textContent = `$${totalPL}`;
+  document.getElementById("totalTrades").textContent = trades.length;
+  document.getElementById("avgConfidence").textContent =
+    trades.length ? (totalConfidence / trades.length).toFixed(1) : 0;
+
+  localStorage.setItem("trades", JSON.stringify(trades));
+}
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const trade = {
+    pl: Number(pl.value),
+    confidence: Number(confidence.value),
+    strategy: strategy.value,
+    risk: risk.value,
+    rr: rr.value,
+    platform: platform.value,
+    notes: notes.value
+  };
+
+  trades.push(trade);
+  form.reset();
+  render();
+});
+
+render();
